@@ -1,0 +1,96 @@
+/* Global CSS */
+button, a{
+    text-decoration: unset;
+    display: inline-block;
+    color: white;
+    background-color: black;
+    font-weight: 500;
+    border: 1px solid black;
+    border-radius: 6px;
+    transition: .3s all;
+    min-width: 100px;
+    font-size: 15px;
+    text-align: center;
+    padding: 2px 15px;
+}
+button:hover, a:hover{
+    color: black;
+    background-color: white;
+}
+header, footer{
+    position: relative;
+    width: 100%;
+    min-height: 60px;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header span, footer span{
+    position: absolute;
+    align-items: center;
+    right: 10px;
+}
+.base-container{
+    margin: 20px auto;
+}
+#close{
+    font-size: 9px;
+    position: absolute;
+    display: flex;
+    height: 100%;
+    top: 0;
+    align-items: center;
+    right: 6px;
+    cursor: pointer;
+}
+.message{
+    display: block;
+    max-width: 500px;
+    padding: 5px 15px;
+    font-weight: 600;
+    margin: auto;
+    text-align: center;
+    border-radius: 11px;
+    margin-bottom: 15px;
+    position: relative;
+}
+.message.success{
+    color: green;
+    background-color: rgb(0, 128, 0, .2);
+    border: 3px solid green;
+}
+.message.success #close{
+    color: green;
+}
+.message.warning{
+    color: red;
+    background-color: rgb(255, 0, 0, .2);
+    border: 3px solid red;
+}
+.message.warning #close{
+    color: red;
+}
+
+.campaign_list_wrapper h2{
+    text-align: center;
+}
+.campaign_list_wrapper > .button_wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0px;
+}
+.campaign_list_wrapper .thead-dark th{
+    background-color: black;
+    color: white;
+}
+.campaign_list_wrapper tbody td{
+    background-color: transparent;
+}
+.campaign_list_wrapper tbody tr{
+    transition: .5s all;
+}
+.campaign_list_wrapper tbody tr:hover{
+    background-color: #ebebeb;
+}

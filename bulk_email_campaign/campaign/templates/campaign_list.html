@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Campaign List</title>
+{% endblock %}
+
+{% block content %}
+<div class="campaign_list_wrapper">
+<h2>Campaigns</h2>
+<div class="button_wrapper">
+    <a href="{% url 'campaign_create' %}">Create Campaign</a> | <a href="{% url 'validate_upload_file' %}">Upload Recipients</a>
+</div>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Campaign Name</th>
+        <th scope="col">Status</th>
+        <th scope="col">Scheduled</th>
+        <th scope="col">Total Recipient</th>
+        <th scope="col">Sent Count</th>
+        <th scope="col">Failed Count</th>
+        <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if campaigns %}
+        {% for c in campaigns %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ c.name }}</td>
+            <td>{{ c.status }}</td>
+            <td>{{ c.scheduled_time }}</td>
+            <td>{{ c.total_recipients }}</td>
+            <td>{{ c.sent_count }}</td>
+            <td>{{ c.failed_count }}</td>
+            {% if c.status == "draft" %}
+                <td><a title="Click to update the status as scheduled" href="{% url 'update_campaign_status' c.id %}">Update Status</a></td>
+            {% else %}
+                <td><a href="{% url 'campaign_detail' c.id %}">View</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td style="text-align: center" colspan="8">Currently No campaign available</td>
+        </tr>
+    {% endif %}
+  </tbody>
+</table>
+</div>
+
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+{% endblock %}
