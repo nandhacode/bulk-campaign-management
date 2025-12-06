@@ -33,7 +33,6 @@ def upload_bulk_recipent(request):
             return call_form(request,message)
         
         required_columns = {"Name", "Email", "Subscription"}
-        # print(f"Required Column : {required_columns} ==> File Column : {df.columns}")
         if not required_columns.issubset(list(df.columns)):
             message = f"File must contain columns: {required_columns}"
             return call_form(request,message)
@@ -57,9 +56,6 @@ def upload_bulk_recipent(request):
         
         email_in_file = list(df["Email"])
         email_in_database = set(Recipient.objects.filter(email__in=email_in_file).values_list("email", flat=True))
-        # print("Existing Email : ",email_in_database)
-        # print("File Email : ",email_in_file)
-        # print(f"File Email Count : {len(email_in_file)} --- Existing Email Count : {len(email_in_database)}")
 
         to_insert = []
 
@@ -89,13 +85,6 @@ def campaign_create(request):
         if form.is_valid():
             campaign = form.save()
 
-            # if campaign.status == "Scheduled" and campaign.scheduled_at:
-            #     schedule_campaign_task.apply_async(
-            #         args=[campaign.id],
-            #         eta=campaign.scheduled_at
-            #     )
-
-            # messages.success(request, "Campaign created successfully")
             return redirect("campaign_list")
 
     else:
@@ -122,54 +111,3 @@ def campaign_detail(request, id):
         "campaign": campaign,
         "logs": logs
     })
-
-def send_mail_to_me(request):
-    campaign = Campaign.objects.filter(id=1).values('name','subject','content','scheduled_time','status','total_recipients','sent_count','failed_count')
-    df = pd.DataFrame(list(campaign))
-    df = df.rename(columns={
-        'name': 'Campaign Name',
-        'subject': 'Email Subject',
-        'content': 'Email Content',
-        'scheduled_time': 'Scheduled Date',
-        'status': 'Status',
-        'total_recipients': 'Total Recipients',
-        'sent_count': 'Sent Count',
-        'failed_count': 'Failed Count'
-    })
-    
-    csv_buffer = BytesIO()
-    df.to_csv(csv_buffer, index=False)
-    csv_buffer.seek(0)
-
-    email = EmailMessage(
-        subject="Dynamic CSV Report",
-        body="Hello Admin,\n\nAttached is the latest dynamic report.\n\nRegards,\nSystem",
-        from_email="test.nandhagopal@gmail.com",
-        to=["test.nandhagopal@gmail.com"],
-    )
-
-    email.attach(
-        "dynamic_report.csv",
-        csv_buffer.getvalue(),
-        "text/csv"
-    )
-    
-    try:
-        email.send()
-        return JsonResponse({"message": "Email with CSV sent successfully!"})
-    except Exception as e:
-        return JsonResponse({"error": str(e)}, status=500)
-    # try:
-    #     send_mail(
-    #         subject="Test Email",
-    #         message="This is a test email from Django API.",
-    #         from_email="test.nandhagopal@gmail.com",
-    #         recipient_list=["jey.nandha@gmail.com"],
-    #         # fail_silently=False,
-    #     )
-    #     return JsonResponse({"message": "Email sent successfully!"})
-    # except Exception as e:
-    #     return JsonResponse({"error": str(e)}, status=500)
-
-    # return render(request, "campaign_list.html")
-    return JsonResponse({"message": "Email sent successfully!"})

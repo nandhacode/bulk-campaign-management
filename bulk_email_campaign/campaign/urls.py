@@ -2,7 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # path('', views.bulk_upload_form, name="display_form"),
     path('', views.campaign_list, name="campaign_list"),
     path('campaign/update/<int:id>', views.update_campaign_status, name="update_campaign_status"),
     path('campaign/create', views.campaign_create, name="campaign_create"),
