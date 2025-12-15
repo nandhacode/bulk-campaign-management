@@ -93,10 +93,10 @@ http://127.0.0.1:8000/
 Admin can create a new campaign using a simple form. The campaign
 includes:
 
--   **Campaign Name**\
--   **Subject Line**\
--   **Email Content** (Plain text or HTML)\
--   **Scheduled Time for Sending**\
+-   **Campaign Name**
+-   **Subject Line**
+-   **Email Content** (Plain text or HTML)
+-   **Scheduled Time for Sending**
 -   **Status Control** (Draft, Scheduled, In Progress, Completed)
 
 This module ensures clean validation and proper storage of campaign
@@ -110,16 +110,16 @@ Manage recipients efficiently through:
 
 -   Recipient model with:
 
-    -   **Name**\
-    -   **Email Address**\
+    -   **Name**
+    -   **Email Address**
     -   **Subscription Status** (Subscribed / Unsubscribed)
 
--   **Bulk Upload Support**\
+-   **Bulk Upload Support**
     Upload a CSV/Excel file containing recipients.
 
 -   **Validation Rules**
 
-    -   Valid email format\
+    -   Valid email format
     -   Duplicate email detection
 
 This module ensures your mailing list is clean and optimized before
@@ -131,11 +131,11 @@ campaign execution.
 
 Once a campaign is scheduled, the system will:
 
--   Automatically start sending emails at the scheduled time\
--   Process large recipient lists efficiently\
+-   Automatically start sending emails at the scheduled time
+-   Process large recipient lists efficiently
 -   Maintain a **Delivery Log** for each email:
-    -   Recipient Email\
-    -   Sent / Failed\
+    -   Recipient Email
+    -   Sent / Failed
     -   Failure Reason (if any)
 
 The campaign status dynamically updates based on progress: - Draft →
@@ -147,10 +147,10 @@ Scheduled → In Progress → Completed
 
 The dashboard provides campaign-level insights:
 
--   Total Recipients\
--   Sent Count\
--   Failed Count\
--   Status Summary (e.g., *470/500 sent*)\
+-   Total Recipients
+-   Sent Count
+-   Failed Count
+-   Status Summary (e.g., *470/500 sent*)
 -   Click a campaign to view detailed email delivery logs
 
 This helps admins track real-time campaign performance.
@@ -161,7 +161,7 @@ This helps admins track real-time campaign performance.
 
 Once the campaign completes:
 
--   Generate a summary report (Text/CSV)\
+-   Generate a summary report (Text/CSV)
 -   Automatically send the report to the configured **Admin Email**
 
 This ensures proper audit tracking and post-campaign visibility.
